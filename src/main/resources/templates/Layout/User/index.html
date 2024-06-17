@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="Fragment/lib.html::lib('User')">
+    <meta charset="UTF-8">
+    <title>User Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        table {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        thead {
+            background-color: #343a40;
+            color: #fff;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            font-weight: bold;
+        }
+        .btn-create {
+            margin: 20px 0;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-create:hover {
+            background-color: #218838;
+        }
+        .action-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .action-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <button class="btn-create" onclick="location.href='/users/new'">Create</button>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>STT</th>
+            <th>ID</th>
+            <th>UserName</th>
+            <th>Password</th>
+            <th>Email</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>DateOfBirth</th>
+            <th>Role</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user, userStat : ${users}">
+            <td th:text="${userStat.index + 1}"></td>
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.birthDay}"></td>
+            <td th:text="${user.role.getRole_name()}"></td>
+            <td>
+                <a th:href="'/users/edit/' + ${user.id}" class="action-link">EDIT</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
